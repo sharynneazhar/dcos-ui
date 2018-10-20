@@ -270,8 +270,11 @@ class MultiContainerNetworkingFormSection extends mixin(StoreMixin) {
       `containers.${containerIndex}.endpoints.${index}.labels`
     );
 
-    const tooltipContent =
-      "This port will be used to load balance this service address internally";
+    const tooltipContent = (
+      <Trans render="span">
+        This port will be used to load balance this service address internally
+      </Trans>
+    );
     if (isObject(loadBalancedError)) {
       vipPortError = loadBalancedError[VipLabelUtil.defaultVip(index)];
       loadBalancedError = null;
@@ -523,7 +526,7 @@ class MultiContainerNetworkingFormSection extends mixin(StoreMixin) {
         const name = overlay.getName();
 
         return {
-          text: `Virtual Network: ${name}`,
+          text: <Trans render="span">Virtual Network: {name}</Trans>,
           value: `${CONTAINER}.${name}`
         };
       })
