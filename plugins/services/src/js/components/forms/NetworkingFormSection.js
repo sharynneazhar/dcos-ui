@@ -1,4 +1,5 @@
-import { Trans } from "@lingui/macro";
+import { Trans, t } from "@lingui/macro";
+import { withI18n } from "@lingui/react";
 import PropTypes from "prop-types";
 import React from "react";
 import { Tooltip } from "reactjs-components";
@@ -225,8 +226,11 @@ class NetworkingFormSection extends mixin(StoreMixin) {
         `container.docker.portMappings.${index}.labels`
       );
 
-    const tooltipContent =
-      "This port will be used to load balance this service address internally";
+    const tooltipContent = (
+      <Trans render="span">
+        This port will be used to load balance this service address internally
+      </Trans>
+    );
     if (isObject(loadBalancedError)) {
       vipPortError = loadBalancedError[VipLabelUtil.defaultVip(index)];
       loadBalancedError = null;
@@ -542,12 +546,14 @@ class NetworkingFormSection extends mixin(StoreMixin) {
   }
 
   getVirtualNetworks() {
+    const { i18n } = this.props;
+
     return VirtualNetworksStore.getOverlays()
       .mapItems(overlay => {
         const name = overlay.getName();
 
         return {
-          text: `Virtual Network: ${name}`,
+          text: i18n._(t`Virtual Network:`) + " " + name,
           value: `${CONTAINER}.${name}`
         };
       })
@@ -786,4 +792,4 @@ NetworkingFormSection.configReducers = {
   }
 };
 
-module.exports = NetworkingFormSection;
+module.exports = withI18n()(NetworkingFormSection);
