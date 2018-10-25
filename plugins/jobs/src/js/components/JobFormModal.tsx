@@ -391,7 +391,6 @@ export default class JobFormModal extends React.Component<
 
     return (
       <CollapsibleErrorMessage
-        className="error-for-modal"
         details={errorList}
         message={errorMessage.message}
       />

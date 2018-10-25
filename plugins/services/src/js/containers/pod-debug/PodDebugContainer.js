@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { routerShape } from "react-router";
+import { InfoBoxInline } from "@dcos/ui-kit";
 
-import Alert from "#SRC/js/components/Alert";
 import DateUtil from "#SRC/js/utils/DateUtil";
 import ConfigurationMap from "#SRC/js/components/ConfigurationMap";
 import ConfigurationMapHeading from "#SRC/js/components/ConfigurationMapHeading";
@@ -204,16 +204,27 @@ class PodDebugTabView extends React.Component {
     }
 
     return (
-      <Alert showIcon={false} type="warning">
-        {
-          "DC/OS has been waiting for resources and is unable to complete this deployment for "
-        }
-        {DateUtil.getDuration(timeWaiting, null)}
-        {". "}
-        <a className="clickable" onClick={this.handleJumpToRecentOffersClick}>
-          See recent resource offers
-        </a>.
-      </Alert>
+      <div className="infoBoxWrapper">
+        <InfoBoxInline
+          appearance="warning"
+          message={
+            <span>
+              {`DC/OS has been waiting for resources and is unable to complete
+              this deployment for ${DateUtil.getDuration(timeWaiting, null)}.`}
+            </span>
+          }
+          primaryAction={
+            <div
+              className="clickable button-link button-primary"
+              onClick={this.handleJumpToRecentOffersClick}
+              tabIndex={0}
+              role="button"
+            >
+              See recent resource offers
+            </div>
+          }
+        />
+      </div>
     );
   }
 

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { InfoBoxInline } from "@dcos/ui-kit";
 
-import Alert from "#SRC/js/components/Alert";
 import ConfigurationMapHeading from "#SRC/js/components/ConfigurationMapHeading";
 import PodContainerConfigSection from "./PodContainerConfigSection";
 
@@ -26,10 +26,11 @@ const PodContainersConfigSection = ({ appConfig, onEditClick }) => {
     return (
       <div>
         <ConfigurationMapHeading level={2}>Containers</ConfigurationMapHeading>
-        <Alert>
-          No containers specified! Please specify at least one container when
-          creating a multi-container definition!
-        </Alert>
+        <InfoBoxInline
+          appearance="danger"
+          message="No containers specified! Please specify at least one container when
+          creating a multi-container definition!"
+        />
       </div>
     );
   }
